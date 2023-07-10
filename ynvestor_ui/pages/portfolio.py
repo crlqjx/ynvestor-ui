@@ -1,3 +1,6 @@
+from main import backend_url
+import requests 
+import streamlit as st
 
 
 def get_portfolio():
@@ -6,5 +9,5 @@ def get_portfolio():
     result = requests.get(url)
     return st.table(result.json())
 
-
+st.markdown("# Portfolio")
 get_portfolio()

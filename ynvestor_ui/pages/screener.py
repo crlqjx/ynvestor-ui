@@ -43,6 +43,6 @@ with st.form("my_form"):
             st.write('Operating margin range:', operating_margin_slider)
 
         if has_gearing:
-            st.write('Gearing range:', gearing)
+            st.write('Gearing range:', gearing_slider)
 
 

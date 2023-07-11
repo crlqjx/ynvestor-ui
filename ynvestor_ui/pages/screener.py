@@ -1,4 +1,7 @@
 import streamlit as st
+import requests
+import os
+from main import backend_url
 
 
 st.markdown("# Screener")
@@ -11,6 +14,8 @@ def param_slider(lower_bound: float, upper_bound: float, default_lower_bound, de
 
 
 with st.form("my_form"):    
+
+    period = st.select_slider('Period', ['Annual', 'Interim'])
 
     has_per = st.checkbox("Price Earnings Ratio")
     per_slider = param_slider(0, 100, 0, 15)
@@ -29,20 +34,30 @@ with st.form("my_form"):
     
     # Every form must have a submit button
     submitted = st.form_submit_button("Submit")
+    fields_filters = []
+
     if submitted:
         if has_per:
-            st.write('PER range:', per_slider)
+            fields_filters.append({'field_name': 'per', 'filter_range': list(per_slider)})
 
         if has_eps:
-            st.write('EPS range:', eps_slider)
+            fields_filters.append({'field_name': 'eps', 'filter_range': list(eps_slider)})
 
         if has_roe:
-            st.write('ROE range:', roe_slider)
+            fields_filters.append({'field_name': 'roe', 'filter_range': list(roe_slider)})
 
         if has_operating_margin:
-            st.write('Operating margin range:', operating_margin_slider)
+            fields_filters.append({'field_name': 'operating_margin', 'filter_range': list(operating_margin_slider)})
 
         if has_gearing:
-            st.write('Gearing range:', gearing_slider)
+            fields_filters.append({'field_name': 'gearing', 'filter_range': list(gearing_slider)})
 
+        screening_params = {
+                'period': period,
+                'fields_to_filter': fields_filters
+                }
+        st.write(screening_params)
+        
+        url = f'{backend_url}stock-screener'
+        res = requests.post(url, json=screening_params)
 

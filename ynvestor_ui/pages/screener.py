@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import os
-from main import backend_url
+from ynvestor_ui import backend_url
 
 
 st.markdown("# Screener")
@@ -56,8 +56,7 @@ with st.form("my_form"):
                 'period': period,
                 'fields_to_filter': fields_filters
                 }
-        st.write(screening_params)
         
         url = f'{backend_url}stock-screener'
         res = requests.post(url, json=screening_params)
-
+        st.table(res.json())

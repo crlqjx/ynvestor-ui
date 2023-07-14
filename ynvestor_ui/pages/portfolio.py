@@ -1,4 +1,4 @@
-from main import backend_url
+from ynvestor_ui import backend_url
 import requests 
 import streamlit as st
 

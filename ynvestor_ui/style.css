@@ -1,0 +1,36 @@
+/* Colors */
+
+:root {
+    --dark-grey: #292b2c;
+    --whitish: #dbdbdb;
+    --yellowish: #ffdf00;
+}
+
+
+/* nav bar */
+nav {
+    background-color: var(--dark-grey);
+}
+
+nav a {
+    color: var(--whitish)
+}
+nav a:hover {
+    background-color: yellow
+}
+.header_logo img {
+    width: 70%;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px
+}
+.github_link a {
+    padding-right: 8px
+}
+
+/* Flex box */
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}

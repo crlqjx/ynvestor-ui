@@ -1,6 +1,15 @@
-const template = document.createElement('template')
+import { addPortfolioEventListener } from './js/portfolio/portfolio_event_listener.js'
+import { addScreenerEventListener } from './js/screener/screener_event_listener.js'
+import { addRiskEventListener } from './js/risk/risk_event_listener.js'
+import { addOptimizerEventListener } from './js/optimizer/optimizer_event_listener.js'
 
-function myFunction() {
-	return 'this is my function'
-}
+
+// Add event listeners after the page has finished loading
+document.addEventListener('DOMContentLoaded', function () {
+    // TODO: add listeners only if not already done
+    addPortfolioEventListener();
+    addScreenerEventListener();
+    addRiskEventListener();
+    addOptimizerEventListener()
+});
 

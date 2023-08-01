@@ -1,6 +1,7 @@
-export function getCurrentPortfolio() {
-    // Get current stocks portfolio
-    
+
+
+export function getPortfolio() {
+
     const url = "http://192.168.1.55:8000/stocks-portfolio"
 
     return fetch(url)

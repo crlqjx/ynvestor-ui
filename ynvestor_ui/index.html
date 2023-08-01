@@ -11,31 +11,38 @@
 
     <script src="index.js" type="module"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <!-- Include the JS for AG Grid -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <!-- Include the core CSS, this is needed by the grid -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css" />
+    <!-- Include the theme CSS, only need to import the theme you are going to use -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
 
     <title>Turtle Investments</title>
 
 </head>
 
-<body>
-    <header class="header">
-        <nav class="flex flex-ai-c">
-            <a href="/" class="header_logo">
-                <img src="static/logo_292b2c_small.png" class=logo>
-            </a>
-            <div class="header_links">
-                <a href="#portfolio" class="portfolio-link">Portfolio</a>
-                <a href="#screener" class="screener-link">Screener</a>
-                <a href="#risk" class="risk-link">Risk</a>
-                <a href="#optimizer" class="optimizer-link">Optimizer</a>
-            </div>
-            <div class="github_link">
-                <a href="">My Github</a>
-            </div>
-        </nav>
-    </header>
+<header class="header">
+    <nav class="flex flex-ai-c">
+        <a href="/" class="header_logo">
+            <img src="static/logo_292b2c_small.png" class=logo>
+        </a>
+        <div class="header_links">
+            <a href="#portfolio" class="portfolio-link">Portfolio</a>
+            <a href="#screener" class="screener-link">Screener</a>
+            <a href="#risk" class="risk-link">Risk</a>
+            <a href="#optimizer" class="optimizer-link">Optimizer</a>
+        </div>
+        <div class="github_link">
+            <a href="">My Github</a>
+        </div>
+    </nav>
+</header>
 
-    <div id="main-frame"></div>
+<body>
+    <div id="main-frame" class="flex-container"></div>
 </body>
+
+
 
 </html>

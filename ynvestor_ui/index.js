@@ -5,11 +5,11 @@ import { addOptimizerEventListener } from './js/optimizer/optimizer_event_listen
 
 
 // Add event listeners after the page has finished loading
-document.addEventListener('DOMContentLoaded', function () {
-    // TODO: add listeners only if not already done
+document.addEventListener('DOMContentLoaded', function() {
     addPortfolioEventListener();
     addScreenerEventListener();
     addRiskEventListener();
-    addOptimizerEventListener()
+    addOptimizerEventListener();
+
 });
 

@@ -1,27 +1,32 @@
-import { getCurrentPortfolio } from './get_portfolio.js'
+import { getPortfolio } from "./get_portfolio.js"
 
 
-export function addPortfolioEventListener () {
+export function addPortfolioEventListener() {
     const portfolioLink = document.querySelector('.portfolio-link')
-    const portfolioContainer = document.createElement('div')
     const mainFrame = document.getElementById('main-frame')
+    const portfolioContainer = document.createElement('div')
 
-    portfolioContainer.classList.add('portfolio-container')
-
-    portfolioLink.addEventListener('click', function (event) {
+    portfolioLink.addEventListener('click', function(event) {
         event.preventDefault() // Prevent the default behavior of the link (i.e., navigating to another page)
 
-        mainFrame.innerHTML = 'Loading portfolio...'
+        mainFrame.innerHTML = ""
 
-        // Function to get the current portfolio and put it in the body of the html
-        getCurrentPortfolio()
-            .then(data => {
-                mainFrame.innerHTML = ''
-                portfolioContainer.innerHTML = JSON.stringify(data)
-                mainFrame.appendChild(portfolioContainer)
-            })
-            .catch(error => {
-                console.log(error)
+        portfolioContainer.id = 'portfolio-container'
+
+        mainFrame.appendChild(portfolioContainer)
+
+        getPortfolio()
+            .then(function(portfolioData) {
+                console.log(portfolioData)
+
+                const columnDefs = Object.keys(portfolioData[0]).map(key => ({field: key}))
+                const gridOptions = {
+                    columnDefs: columnDefs,
+                    rowData: portfolioData
+                }
+
+                new agGrid.Grid(portfolioContainer, gridOptions)
+
             })
     })
 

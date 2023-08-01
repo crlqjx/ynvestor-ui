@@ -1,5 +1,4 @@
 /* Colors */
-
 :root {
     --dark-grey: #292b2c;
     --whitish: #dbdbdb;
@@ -15,22 +14,47 @@ nav {
 nav a {
     color: var(--whitish)
 }
+
 nav a:hover {
     background-color: yellow
 }
+
 .header_logo img {
     width: 70%;
     padding-left: 8px;
     padding-top: 4px;
     padding-bottom: 4px
 }
+
 .github_link a {
     padding-right: 8px
 }
 
-/* Flex box */
+
+/* Main Frame (body) */
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
 .flex {
     display: flex;
     align-items: center;
     justify-content: space-between
+}
+
+#main-frame {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    background-color: pink
+}
+
+.flex-container > div {
+    width: 95%;
 }

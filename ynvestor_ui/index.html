@@ -10,6 +10,11 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 
     <script src="index.js" type="module"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript" src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+
 
     <!-- Include the JS for AG Grid -->
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
@@ -22,25 +27,31 @@
 
 </head>
 
-<header class="header">
-    <nav class="flex flex-ai-c">
-        <a href="/" class="header_logo">
-            <img src="static/logo_292b2c_small.png" class=logo>
-        </a>
-        <div class="header_links">
-            <a href="#portfolio" class="portfolio-link">Portfolio</a>
-            <a href="#screener" class="screener-link">Screener</a>
-            <a href="#risk" class="risk-link">Risk</a>
-            <a href="#optimizer" class="optimizer-link">Optimizer</a>
-        </div>
-        <div class="github_link">
-            <a href="">My Github</a>
-        </div>
-    </nav>
-</header>
-
 <body>
-    <div id="main-frame" class="flex-container"></div>
+    <header class="header">
+        <nav class="flex flex-ai-c">
+            <a href="/" class="header_logo">
+                <img src="static/logo_292b2c_small.png" class=logo>
+            </a>
+            <div class="header_links">
+                <a href="#portfolio" class="portfolio-link">Portfolio</a>
+                <a href="#screener" class="screener-link">Screener</a>
+                <a href="#risk" class="risk-link">Risk</a>
+                <a href="#optimizer" class="optimizer-link">Optimizer</a>
+            </div>
+            <div class="github_link">
+                <a href="">My Github</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-frame">
+    </main>
+
+    <footer>
+        <p>by Cyril Quijoux</p>
+    </footer>
+
 </body>
 
 

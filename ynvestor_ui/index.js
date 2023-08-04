@@ -4,12 +4,12 @@ import { addRiskEventListener } from './js/risk/risk_event_listener.js'
 import { addOptimizerEventListener } from './js/optimizer/optimizer_event_listener.js'
 
 
+
 // Add event listeners after the page has finished loading
 document.addEventListener('DOMContentLoaded', function() {
     addPortfolioEventListener();
     addScreenerEventListener();
     addRiskEventListener();
     addOptimizerEventListener();
-
 });
 

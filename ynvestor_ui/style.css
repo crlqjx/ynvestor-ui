@@ -5,10 +5,65 @@
     --yellowish: #ffdf00;
 }
 
+html {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+header,
+footer {
+    position: fixed;
+    color: var(--whitish);
+    background-color: var(--dark-grey);
+    width: inherit;
+    max-width: inherit;
+    padding: 1rem;
+}
+
+header {
+    top: 0
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    height: 3vh;
+    width: 100%;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: inherit;
+    max-width: 100%;
+    height: 100%;
+    padding: 8rem 1rem
+}
+
+main > div {
+    margin: 50px 0px;
+    border: 1px solid;
+    height: 30vh;
+}
 
 /* nav bar */
 nav {
-    background-color: var(--dark-grey);
+    display: flex;
+    align-items: center;
+    justify-content: space-between
 }
 
 nav a {
@@ -30,31 +85,3 @@ nav a:hover {
     padding-right: 8px
 }
 
-
-/* Main Frame (body) */
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0
-}
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-#main-frame {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.flex-container {
-    display: flex;
-    justify-content: center;
-    background-color: pink
-}
-
-.flex-container > div {
-    width: 95%;
-}

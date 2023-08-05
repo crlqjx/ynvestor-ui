@@ -1,7 +1,9 @@
-export function getPortfolioChart() {
+
+
+export async function getPortfolioChartData() {
     const url = "http://192.168.1.55:8000/portfolio-chart-data"
 
-    fetch(url)
+    return fetch(url)
         .then(response => response.json())
         .then(chartData => {
             let params = {
@@ -13,7 +15,9 @@ export function getPortfolioChart() {
                 series: chartData,
                 yAxis: { offset: 30 }
             }
-            Highcharts.stockChart("portfolio-chart", params)
+            return params
         })
-
+    .catch(error => {
+        throw error
+    })
 }

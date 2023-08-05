@@ -1,6 +1,6 @@
 
 
-export async function getPortfolioGrid() {
+export async function getPortfolioGridData() {
 
     const url = "http://192.168.1.55:8000/stocks-portfolio"
 

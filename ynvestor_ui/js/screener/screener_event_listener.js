@@ -5,29 +5,14 @@ export function addScreenerEventListener() {
     const screenerContainer = document.createElement('div')
     const mainFrame = document.querySelector('.main-frame')
 
-    const path = window.location.pathname
+window.location.pathname
     screenerContainer.classList.add('screener-container')
-
-    // function loadScreenerPage() {
-
-    //     history.pushState(null, null, screenerURL)
-
-
-    //     mainFrame.innerHTML = ''
-
-    //     screenerContainer.innerHTML = 'SCREENER PART'
-    //     mainFrame.appendChild(screenerContainer)
-
-    // }
-
-
 
     function loadScreenerPage() {
         const criteriaContainer = document.createElement('div')
         criteriaContainer.id = 'criteria-container'
         criteriaContainer.classList.add('criteria')
 
-        history.pushState(null, null, screenerURL)
         mainFrame.innerHTML = ''
 
         function createSelectElement(options) {
@@ -91,7 +76,8 @@ export function addScreenerEventListener() {
 
 
     function handleNavigation() {
-        if (path === screenerURL) {
+
+        if (window.location.pathname === screenerURL) {
             loadScreenerPage()
         }
     }
@@ -102,8 +88,8 @@ export function addScreenerEventListener() {
 
     screenerLink.addEventListener('click', function(event) {
         event.preventDefault()
-
-        loadScreenerPage(mainFrame)
-
+        history.pushState(null, null, screenerURL)
+        handleNavigation()
     })
+    handleNavigation()
 }

@@ -5,7 +5,6 @@ export function addScreenerEventListener() {
     const screenerContainer = document.createElement('div')
     const mainFrame = document.querySelector('.main-frame')
 
-    window.location.pathname
     screenerContainer.classList.add('screener-container')
 
     function loadScreenerPage() {
@@ -128,6 +127,7 @@ export function addScreenerEventListener() {
     function handleNavigation() {
 
         if (window.location.pathname === screenerURL) {
+            screenerContainer.innerHTML = ""
             loadScreenerPage()
         }
     }

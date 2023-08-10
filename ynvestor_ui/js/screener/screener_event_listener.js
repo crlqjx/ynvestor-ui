@@ -5,18 +5,26 @@ export function addScreenerEventListener() {
     const screenerContainer = document.createElement('div')
     const mainFrame = document.querySelector('.main-frame')
 
-window.location.pathname
+    window.location.pathname
     screenerContainer.classList.add('screener-container')
 
     function loadScreenerPage() {
-        const criteriaContainer = document.createElement('div')
-        criteriaContainer.id = 'criteria-container'
-        criteriaContainer.classList.add('criteria')
+        const criteriasContainer = document.createElement('div')
+        const criteriaRow = document.createElement('div')
+        criteriasContainer.id = 'criteria-container'
+        criteriaRow.id = 'criteria-row'
+        criteriaRow.classList.add('criteria')
 
         mainFrame.innerHTML = ''
 
-        function createSelectElement(options) {
+        function createSelectElement(options, placeholder) {
             const selectElement = document.createElement('select')
+            const placeholderOptionElement = document.createElement('option')
+            placeholderOptionElement.value = ""
+            placeholderOptionElement.textContent = placeholder
+            placeholderOptionElement.disabled = true
+            placeholderOptionElement.selected = true
+            selectElement.appendChild(placeholderOptionElement)
             options.forEach((option) => {
                 const optionElement = document.createElement("option")
                 optionElement.value = option.value
@@ -33,7 +41,7 @@ window.location.pathname
 
             return input
         }
-        
+
         // Criteria type (filter on price, volume, ...)
         const availableCriteria = [
             { "value": "price", "label": "Price" },
@@ -41,7 +49,7 @@ window.location.pathname
             // add more criteria here
         ]
 
-        const criteriaSelectElement = createSelectElement(availableCriteria)
+        const criteriaSelectElement = createSelectElement(availableCriteria, "criteria")
 
         // Condition (greater then, lower than, equals)
         const availableConditions = [
@@ -49,28 +57,70 @@ window.location.pathname
             { value: "less", label: "Less than" },
             { value: "equal", label: "Equals" }
         ]
-        const conditionSelectElement = createSelectElement(availableConditions)
-        conditionSelectElement.onchange = function () {
+        const conditionSelectElement = createSelectElement(availableConditions, "condition")
+        conditionSelectElement.onchange = function() {
             console.log('If "equals", only one input box')
         }
 
         const numericalFilterValueInput = createInputElement("number", "Value")
         numericalFilterValueInput.step = "0.01"
 
+        function removeCriteria(criteriaButton) {
+            let criteriaSection = criteriaButton.parentNode
+
+            if (document.getElementById('criteria-container').childElementCount === 1) {
+                alert('Must have at least one filtering criteria')
+                return
+            }
+
+            criteriaSection.remove()
+        }
+
         const removeCriteriaButton = document.createElement("button")
         removeCriteriaButton.type = "button"
         removeCriteriaButton.textContent = "Remove"
-        removeCriteriaButton.onclick = function () {
-            console.log('Removing Criteria')
+        removeCriteriaButton.classList.add('remove-criteria-button')
+        removeCriteriaButton.addEventListener('click', function() {
+            removeCriteria(this)
+        })
+
+        const addCriteriaButton = document.createElement('button')
+        addCriteriaButton.type = 'button'
+        addCriteriaButton.textContent = "Add"
+        addCriteriaButton.onclick = function() {
+            let criteriaClone = document.querySelector(".criteria").cloneNode(true)
+            criteriasContainer.appendChild(criteriaClone)
+            // Set placeholder value to default for select option elements
+            criteriaClone.querySelectorAll('select').forEach((selectOption) => {
+                selectOption.querySelector('option').selected = true
+            })
+            // Reset behavior of remove button
+            criteriaClone.querySelector('.remove-criteria-button').addEventListener('click', function() {
+                removeCriteria(this)
+            })
         }
 
+        criteriaRow.appendChild(criteriaSelectElement)
+        criteriaRow.appendChild(conditionSelectElement)
+        criteriaRow.appendChild(numericalFilterValueInput)
+        criteriaRow.appendChild(removeCriteriaButton)
 
-        criteriaContainer.appendChild(criteriaSelectElement)
-        criteriaContainer.appendChild(conditionSelectElement)
-        criteriaContainer.appendChild(numericalFilterValueInput)
-        criteriaContainer.appendChild(removeCriteriaButton)
-        
-        mainFrame.appendChild(criteriaContainer)
+        const screenerButton = document.createElement("button")
+        screenerButton.type = "submit"
+        screenerButton.textContent = "Start screening"
+
+        criteriasContainer.appendChild(criteriaRow)
+        screenerContainer.appendChild(criteriasContainer)
+        screenerContainer.appendChild(screenerButton)
+
+        const buttonContainer = document.createElement('div')
+        buttonContainer.classList.add("button-container")
+        buttonContainer.appendChild(addCriteriaButton)
+        buttonContainer.appendChild(screenerButton)
+
+        screenerContainer.appendChild(buttonContainer)
+
+        mainFrame.appendChild(screenerContainer)
 
     }
 

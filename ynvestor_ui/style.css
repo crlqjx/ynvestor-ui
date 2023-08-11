@@ -85,3 +85,6 @@ nav a:hover {
     padding-right: 8px
 }
 
+.criteria {
+    display: flex
+}

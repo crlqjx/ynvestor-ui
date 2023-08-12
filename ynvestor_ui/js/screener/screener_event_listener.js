@@ -4,8 +4,10 @@ export function addScreenerEventListener() {
     const screenerURL = "/screener"
     const screenerLink = document.querySelector('.screener-link')
     const screenerContainer = document.createElement('div')
+    const resultContainer = document.createElement('div')
 
     screenerContainer.classList.add('screener-container')
+    resultContainer.classList.add('result-container')
 
 
 
@@ -13,7 +15,7 @@ export function addScreenerEventListener() {
 
         if (window.location.pathname === screenerURL) {
             screenerContainer.innerHTML = ""
-            loadScreenerPage(screenerContainer)
+            loadScreenerPage(screenerContainer, resultContainer)
         }
     }
 

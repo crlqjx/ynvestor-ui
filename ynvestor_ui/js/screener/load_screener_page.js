@@ -1,3 +1,4 @@
+import { getScreenerResults } from './get_screener_results.js'
 
 function createSelectElement(options, placeholder) {
     const selectElement = document.createElement('select')
@@ -58,14 +59,41 @@ function removeCriteria(criteriaButton) {
     criteriaSection.remove()
 }
 
-export function loadScreenerPage(screenerContainer) {
+function getCriterias() {
+    const criterias = document.querySelectorAll('.criteria')
+    const period = document.querySelector('.period-select-element')
+    let fieldsToFilter = []
+    criterias.forEach((criteria) => {
+        const criteriaName = criteria.querySelector('.criteria-type').value
+        const criteriaValues = [
+            parseFloat(criteria.querySelector('Input[name="criteria-value-min"]').value),
+            parseFloat(criteria.querySelector('Input[name="criteria-value-max"]').value)
+        ]
+        fieldsToFilter.push({
+            "field_name": criteriaName,
+            "filter_range": criteriaValues
+        })
+    })
+
+    return {
+        "period": period.value,
+        "fields_to_filter": fieldsToFilter
+    }
+
+}
+
+export function loadScreenerPage(screenerContainer, resultContainer) {
 
     const mainFrame = document.querySelector('.main-frame')
+    const periodContainer = document.createElement('div')
     const criteriasContainer = document.createElement('div')
     const criteriaRow = document.createElement('div')
+    const resultGrid = document.createElement('div')
+    periodContainer.id = 'period-container'
     criteriasContainer.id = 'criteria-container'
     criteriaRow.id = 'criteria-row'
     criteriaRow.classList.add('criteria')
+    resultGrid.classList.add('ag-theme-alpine')
 
     mainFrame.innerHTML = ''
 
@@ -135,15 +163,37 @@ export function loadScreenerPage(screenerContainer) {
 
     criteriaRow.appendChild(criteriaSelectElement)
     criteriaRow.appendChild(conditionSelectElement)
-    // criteriaRow.appendChild(numericalFilterValueInput)
     criteriaRow.appendChild(criteriaValuesContainer)
     criteriaRow.appendChild(removeCriteriaButton)
 
     const screenerButton = document.createElement("button")
     screenerButton.type = "submit"
     screenerButton.textContent = "Start screening"
+    screenerButton.addEventListener('click', async function() {
+        const filters = getCriterias()
+
+        // Clear past results
+        resultGrid.innerHTML = ''
+
+        // send request to API
+        const results = await getScreenerResults(filters)
+
+        // Format result with AgGrid
+        const columnDefs = Object.keys(results[0]).map(key => ({field: key})) //TODO: reformat header name by using "headerName" key
+
+        const screenerResultGridOptions = {
+            columnDefs: columnDefs,
+            rowData: results
+        }
+
+        mainFrame.appendChild(resultGrid)
+        new agGrid.Grid(resultGrid, screenerResultGridOptions)
+
+    })
+
 
     criteriasContainer.appendChild(criteriaRow)
+    screenerContainer.appendChild(periodContainer)
     screenerContainer.appendChild(criteriasContainer)
     screenerContainer.appendChild(screenerButton)
 

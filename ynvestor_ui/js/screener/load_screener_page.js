@@ -33,8 +33,12 @@ function handleConditionChange(conditionSelect) {
     if (conditionSelect.value === 'between') {
         // create input box for min value and input box for max value
         const criteriaValueMin = createInputElement("number", "Min")
+        criteriaValueMin.name = "criteria-value-min"
+        criteriaValueMin.classList.add('criteria-value')
         criteriaValueMin.step = "0.01"
         const criteriaValueMax = createInputElement("number", "Max")
+        criteriaValueMax.name = "criteria-value-max"
+        criteriaValueMax.classList.add('criteria-value')
         criteriaValueMax.step = "0.01"
 
         criteriaValuesContainer.appendChild(criteriaValueMin)
@@ -65,22 +69,34 @@ export function loadScreenerPage(screenerContainer) {
 
     mainFrame.innerHTML = ''
 
+    // Period of statements (annual of interim)
+    const periodSelectElement = createSelectElement([
+        { "value": "annual", "label": "Annual" },
+        { "value": "interim", "label": "Interim" }
+    ], "--statements period--")
+    periodSelectElement.classList.add('period-select-element')
+    periodContainer.appendChild(periodSelectElement)
+
+
     // Criteria type (filter on price, volume, ...)
     const availableCriteria = [
-        { "value": "price", "label": "Price" },
-        { "value": "volume", "label": "Volume" }
+        { "value": "eps", "label": "EPS" },
+        { "value": "per", "label": "PER" },
+        { "value": "roe", "label": "ROE" },
+        { "value": "gearing", "label": "Gearing" },
+        { "value": "operating_margin", "label": "Operating Margin" },
         // add more criteria here
     ]
 
-    const criteriaSelectElement = createSelectElement(availableCriteria, "criteria")
-    criteriaSelectElement.id = "criteria-type"
+    const criteriaSelectElement = createSelectElement(availableCriteria, "--criteria--")
+    criteriaSelectElement.classList.add("criteria-type")
 
     // Condition (greater then, lower than, equals)
     const availableConditions = [
         { value: "between", label: "Between" }
     ]
 
-    const conditionSelectElement = createSelectElement(availableConditions, "condition")
+    const conditionSelectElement = createSelectElement(availableConditions, "--condition--")
     const criteriaValuesContainer = document.createElement('div')
     criteriaValuesContainer.classList.add('criteria-values-container')
     conditionSelectElement.classList.add('condition-select-element')

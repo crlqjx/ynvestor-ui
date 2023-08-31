@@ -1,20 +1,13 @@
+import { loadRiskPage } from "./load_risk_page"
 
 
-export function addRiskEventListener () {
+export function addRiskEventListener() {
     const riskURL = "/risk"
     const riskLink = document.querySelector('.risk-link')
     const riskContainer = document.createElement('div')
     const mainFrame = document.querySelector('.main-frame')
 
     riskContainer.classList.add('risk-container')
-
-    function loadRiskPage() {
-
-        mainFrame.innerHTML = ''
-        riskContainer.innerHTML = 'RISK PART'
-
-        mainFrame.appendChild(riskContainer)
-    }
 
     function handleNavigation() {
         const currentPath = window.location.pathname
@@ -23,13 +16,13 @@ export function addRiskEventListener () {
         }
     }
 
-    window.addEventListener("popstate", function () {
+    window.addEventListener("popstate", function() {
         handleNavigation
     })
 
     document.addEventListener('DOMContentLoaded', handleNavigation)
 
-    riskLink.addEventListener('click', function (event) {
+    riskLink.addEventListener('click', function(event) {
         event.preventDefault()
         history.pushState(null, null, riskURL)
         handleNavigation()

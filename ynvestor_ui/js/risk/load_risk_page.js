@@ -2,27 +2,6 @@ import { getRiskMetrics } from "./get_risk_metrics"
 import { getValueAtRiskChartData } from "./get_value_at_risk_chart_data"
 
 
-async function getRiskMetricsGridOptions(annualizedVolatility, sharpeRatio, valueAtRisk) {
-    const rowData = [
-        { metric: 'Annualized Volatility', value: annualizedVolatility},
-        { metric: 'Sharpe Ratio', value: sharpeRatio },
-        { metric: 'Value At Risk', value: valueAtRisk }
-    ]
-
-    const columnDefs = [
-        { field: 'metric', headerName: ''},
-        { field: 'value', headerName: '' },
-    ]
-
-    const gridOptions = {
-        columnDefs: columnDefs,
-        rowData: rowData,
-    }
-
-    return gridOptions
-}
-
-
 export async function loadRiskPage() {
     const mainFrame = document.querySelector('.main-frame')
     const valueAtRiskChartContainer = document.createElement('div')
@@ -35,11 +14,6 @@ export async function loadRiskPage() {
 
     // Get risk metrics data
     const riskMetrics = await getRiskMetrics()
-    const riskMetricsGridOptions = await getRiskMetricsGridOptions(
-        riskMetrics['annualized_volatility'],
-        riskMetrics['sharpe_ratio'],
-        riskMetrics['value_at_risk']
-    )
 
     // new agGrid.Grid(riskMetricsContainer, riskMetricsGridOptions)
     riskMetricsContainer.innerHTML = riskMetrics['risk_metrics_html_table']

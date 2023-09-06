@@ -1,4 +1,4 @@
-import { getScreenerResults } from './get_screener_results.js'
+import { getScreenerResults } from "./get_screener_results.js"
 
 function createSelectElement(options, placeholder) {
     const selectElement = document.createElement('select')

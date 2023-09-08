@@ -1,3 +1,4 @@
+import { loadOptimizerPage } from "./load_optimizer_page"
 
 
 export function addOptimizerEventListener () {
@@ -8,17 +9,10 @@ export function addOptimizerEventListener () {
 
     optimizerContainer.classList.add('optimizer-container')
 
-    function loadOptimizerPage() {
-
-        mainFrame.innerHTML = ''
-
-        optimizerContainer.innerHTML = 'OPTIMIZER PART'
-        mainFrame.appendChild(optimizerContainer)
-    }
-
     function handleNavigation() {
         const currentPath = window.location.pathname
         if (currentPath === optimizerURL) {
+            mainFrame.innerHTML = ''
             loadOptimizerPage()
         }
     }
